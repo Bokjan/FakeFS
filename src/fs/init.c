@@ -33,6 +33,7 @@ int ffs_init(const char *conf)
         strcpy(ffs_root, root_path->valuestring);
         if(ffs_root[len - 1] != '/')
             ffs_root[len] = '/';
+        ffs_root_len = strlen(ffs_root);
     }
     else
         return -1;

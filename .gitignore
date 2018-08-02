@@ -54,3 +54,5 @@ dkms.conf
 # Other
 build
 ._*
+.DS_Store
+._.DS_Store

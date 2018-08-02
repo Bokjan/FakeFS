@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <dirent.h>
 #include <cjson/cJSON.h>
 
+#include "../fs/def.h"
+
 int need_confirm = 1;
 const char *root_path = NULL;
-
 
 void parse_args(int argc, char *argv[])
 {
@@ -74,7 +76,10 @@ void generate_config_json(void)
 
 void generate_files(void)
 {
-    
+    char rootbuf[1024];
+    sprintf(rootbuf, "%s/file0", root_path);
+    FILE *rfp = fopen(rootbuf, "w");
+    fclose(rfp);
 }
 
 int main(int argc, char *argv[])
@@ -97,5 +102,6 @@ int main(int argc, char *argv[])
     }
     generate_files();
     generate_config_json();
+    puts("Success! A `config.json` file is in your working directory now.");
 END:;
 }
