@@ -16,6 +16,7 @@ int ffs_readdir(
     off_t offset, struct fuse_file_info *fi);
 int ffs_getattr(const char *path, struct stat *stbuf);
 int ffs_mkdir(const char *path, mode_t mode);
+int ffs_rmdir(const char *path);
 
 #ifdef __cplusplus
 }

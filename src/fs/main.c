@@ -6,7 +6,8 @@ static struct fuse_operations ffs_operations =
 {
     .readdir = ffs_readdir,
     .getattr = ffs_getattr,
-    .mkdir   = ffs_mkdir
+    .mkdir   = ffs_mkdir,
+    .rmdir   = ffs_rmdir
 };
 
 int main(int argc, char *argv[])

@@ -9,6 +9,10 @@ extern "C"
 Entry structure:
     4 B    |    4 B    |     256 B    |
 File or Dir|  File ID  | File/Dir Name|
+
+If `Name` has 256 0x0, 
+then this entry is marked as deleted.
+
 */
 
 #include <stdint.h>

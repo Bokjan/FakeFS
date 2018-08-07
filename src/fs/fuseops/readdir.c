@@ -27,6 +27,8 @@ int ffs_readdir(
     ffs_entry_t entry;
     while(fread(&entry, sizeof(entry), 1, fp) == 1)
     {
+        if(entry.filename[0] == '\0') // `deleted` entry
+            continue;
         struct stat est;
         char *epath = ffs_path_by_id(entry.fileid);
         stat(epath, &est);
