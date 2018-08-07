@@ -6,6 +6,7 @@
 
 int ffs_init(const char *conf)
 {
+    /* Open configuration file */
     if(conf == NULL)
         conf = "./fakefs.json";
     FILE *f = fopen(conf, "r");
@@ -16,6 +17,7 @@ int ffs_init(const char *conf)
     if(mem == NULL)
         return -1;
     fread(mem, conf_size, 1, f);
+    /* Read JSON */
     cJSON *obj = cJSON_Parse(mem);
     if(obj == NULL)
     {
@@ -24,6 +26,7 @@ int ffs_init(const char *conf)
             fprintf(stderr, "Config error: %s\n", err);
         return -1;
     }
+    /* Read root path */
     const cJSON *root_path = cJSON_GetObjectItemCaseSensitive(obj, "root");
     if(cJSON_IsString(root_path) && root_path->valuestring != NULL)
     {
@@ -42,5 +45,11 @@ int ffs_init(const char *conf)
         So `free(mem)` only appears here.
     */
     free(mem);
+    /* ===== End JSON ===== */
+    /* FFS_COUNTER setup */
+    ffs_counter_path = (char*)malloc(ffs_root_len + 16);
+    sprintf(ffs_counter_path, "%scounter.bin", ffs_root);
+    pthread_mutex_init(&ffs_counter_mutex, NULL);
+    /* Done! */
     return 0;
 }

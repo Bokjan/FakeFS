@@ -8,7 +8,7 @@ file(GLOB ffs_src "src/fs/*.c")
 file(GLOB ffs_src ${ffs_src} "src/fs/fuseops/*.c")
 
 add_executable(fakefs ${ffs_src})
-target_link_libraries(fakefs cjson fuse)
+target_link_libraries(fakefs cjson fuse pthread)
 
 add_executable(ffs_formatter src/bin/ffs_formatter.c)
 target_link_libraries(ffs_formatter cjson)

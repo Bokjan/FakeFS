@@ -7,6 +7,20 @@
 
 char *ffs_root;
 size_t ffs_root_len;
+char *ffs_counter_path;
+pthread_mutex_t ffs_counter_mutex;
+
+void debug(const char *fmt, ...)
+{
+    static FILE *fp = NULL;
+    if(fp == NULL)
+        fp = fopen(DEBUG_FILE, DEBUG_MODE);
+    va_list ap;
+    va_start(ap, fmt);
+    vfprintf(fp, fmt, ap);
+    va_end(ap);
+    fflush(fp);
+}
 
 int ffsi_get_file_size(FILE *fp)
 {
@@ -63,14 +77,27 @@ RETURN:
     return ret;
 }
 
-void debug(const char *fmt, ...)
+int ffs_counter_value(void)
 {
-    static FILE *fp = NULL;
-    if(fp == NULL)
-        fp = fopen(DEBUG_FILE, DEBUG_MODE);
-    va_list ap;
-    va_start(ap, fmt);
-    vfprintf(fp, fmt, ap);
-    va_end(ap);
-    fflush(fp);
+    int ret = -1;
+    pthread_mutex_lock(&ffs_counter_mutex);
+    FILE *fp = fopen(ffs_counter_path, "r");
+    fread(&ret, sizeof(ret), 1, fp);
+    fclose(fp);
+    pthread_mutex_unlock(&ffs_counter_mutex);
+    return ret;
+}
+
+int ffs_counter_increase(void)
+{
+    int ret = -1;
+    pthread_mutex_lock(&ffs_counter_mutex);
+    FILE *fp = fopen(ffs_counter_path, "r+");
+    fread(&ret, sizeof(ret), 1, fp);
+    ++ret;
+    fseek(fp, 0, SEEK_SET);
+    fwrite(&ret, sizeof(ret), 1, fp);
+    fclose(fp);
+    pthread_mutex_unlock(&ffs_counter_mutex);
+    return ret;
 }

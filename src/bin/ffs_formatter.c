@@ -76,10 +76,15 @@ void generate_config_json(void)
 
 void generate_files(void)
 {
-    char rootbuf[1024];
-    sprintf(rootbuf, "%s/file0", root_path);
-    FILE *rfp = fopen(rootbuf, "w");
-    fclose(rfp);
+    int c = 0;
+    char buf[1024];
+    sprintf(buf, "%s/file0", root_path);
+    FILE *fp = fopen(buf, "w");
+    fclose(fp);
+    sprintf(buf, "%s/counter.bin", root_path);
+    fp = fopen(buf, "w");
+    fwrite(&c, sizeof(c), 1, fp);
+    fclose(fp);
 }
 
 int main(int argc, char *argv[])
