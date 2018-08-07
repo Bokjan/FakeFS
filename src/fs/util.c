@@ -101,3 +101,18 @@ int ffs_counter_increase(void)
     pthread_mutex_unlock(&ffs_counter_mutex);
     return ret;
 }
+
+/* Change the last slash(`/`) to '\0' */
+int ffs_split_parent(char *path)
+{
+    int len = strlen(path);
+    for(int i = len - 1; i >= 0; --i)
+    {
+        if(path[i] == '/')
+        {
+            path[i] = '\0';
+            return i;
+        }
+    }
+    return len - 1;
+}

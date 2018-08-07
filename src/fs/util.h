@@ -22,6 +22,7 @@ char* ffs_path_by_id(uint32_t id);
 ffs_idpair_t ffs_findid(const char *path);
 int ffs_counter_value(void);
 int ffs_counter_increase(void);
+int ffs_split_parent(char *path);
 
 #define DEBUG_FILE "/tmp/ffs/debug.log"
 #define DEBUG_MODE "w"

@@ -4,26 +4,11 @@
 #include <string.h>
 #include <unistd.h>
 
-/* Change the last slash(`/`) to '\0' */
-static int split_parent(char *path)
-{
-    int len = strlen(path);
-    for(int i = len - 1; i >= 0; --i)
-    {
-        if(path[i] == '/')
-        {
-            path[i] = '\0';
-            return i;
-        }
-    }
-    return len - 1;
-}
-
 int ffs_rmdir(const char *_path)
 {
     char *path = strdup(_path);
     /* Don't care about the parent dir's existence - FUSE already did */
-    int slashpos = split_parent(path);
+    int slashpos = ffs_split_parent(path);
     char *dirname = path + slashpos + 1;
     ffs_idpair_t parid = ffs_findid(path);
     ffs_idpair_t dirid = ffs_findid(_path);
