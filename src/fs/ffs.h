@@ -1,8 +1,7 @@
 #ifndef FAKEFS_FFS_H
 #define FAKEFS_FFS_H
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 #include <fuse.h>
@@ -21,6 +20,11 @@ int ffs_mkdir(const char *path, mode_t mode);
 int ffs_rmdir(const char *path);
 int ffs_unlink(const char *path);
 int ffs_rename(const char *from, const char *to);
+int ffs_chmod(const char *path, mode_t mode);
+int ffs_chown(const char *path, uid_t uid, gid_t gid);
+
+int ffs_create(const char *path, mode_t mode, struct fuse_file_info *fi);
+int ffs_open(const char *path, struct fuse_file_info *fi);
 /* fuse_operations */
 
 #ifdef __cplusplus

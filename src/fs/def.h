@@ -1,8 +1,7 @@
 #ifndef FAKEFS_DEF_H
 #define FAKEFS_DEF_H
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 /*

@@ -3,8 +3,11 @@ project(fakefs)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_FLAGS "-Wall -fPIC -pie -D_FILE_OFFSET_BITS=64 -DFUSE_USE_VERSION=28")
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_FLAGS "-Wall -fPIC -pie")
 
 file(GLOB ffs_src "src/fs/*.c")
+file(GLOB ffs_src ${ffs_src} "src/fs/*.cc")
 file(GLOB ffs_src ${ffs_src} "src/fs/fuseops/*.c")
 
 add_executable(fakefs ${ffs_src})

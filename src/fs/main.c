@@ -8,8 +8,12 @@ static struct fuse_operations ffs_operations =
     .getattr = ffs_getattr,
     .mkdir   = ffs_mkdir,
     .rmdir   = ffs_rmdir,
-    .unlink  = ffs_rmdir,
-    .rename  = ffs_rename
+    .unlink  = ffs_rmdir, // temporarily, this one
+    .rename  = ffs_rename,
+    .chmod   = ffs_chmod,
+    .chown   = ffs_chown,
+
+    .create  = ffs_create
 };
 
 int main(int argc, char *argv[])

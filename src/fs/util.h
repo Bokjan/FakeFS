@@ -1,5 +1,8 @@
 #ifndef FAKEFS_UTIL_H
 #define FAKEFS_UTIL_H
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include <stdio.h>
 #include <stdint.h>
@@ -24,8 +27,15 @@ int ffs_counter_value(void);
 int ffs_counter_increase(void);
 int ffs_split_parent(char *path);
 
+int  ffs_fdmap_get(const char *path);
+void ffs_fdmap_set(const char *path, int fd);
+void ffs_fdmap_remove(const char *path);
+
 #define DEBUG_FILE "/tmp/ffs/debug.log"
 #define DEBUG_MODE "w"
 void debug(const char *fmt, ...);
 
+#ifdef __cplusplus
+}
+#endif
 #endif
