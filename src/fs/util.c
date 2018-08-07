@@ -1,5 +1,7 @@
 #include "def.h"
 #include "util.h"
+#include <stdio.h>
+#include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -39,11 +41,10 @@ ffs_idpair_t ffs_findid(const char *path)
         char *parentidpath = ffs_path_by_id(parentid);
         FILE *fp = fopen(parentidpath, "r");
         ffs_entry_t entry;
-        while(fread(&entry, sizeof(entry), 1, fp) != EOF)
+        while(fread(&entry, sizeof(entry), 1, fp) == 1)
         {
             if(strcmp(entry.filename, s) != 0)
                 continue;
-            // fprintf(stderr, "entry: %s %d %d\n", entry.filename, entry.fileid, entry.type);
             parentid = entry.fileid;
             ret.type = entry.type;
             break;
@@ -59,6 +60,17 @@ ffs_idpair_t ffs_findid(const char *path)
     ret.id = parentid;
 RETURN:
     free(p);
-    // fprintf(stderr, "==FINDID==\n%s ID=%d TYPE=%d\n==========\n", path, ret.id, ret.type);  
     return ret;
+}
+
+void debug(const char *fmt, ...)
+{
+    static FILE *fp = NULL;
+    if(fp == NULL)
+        fp = fopen(DEBUG_FILE, DEBUG_MODE);
+    va_list ap;
+    va_start(ap, fmt);
+    vfprintf(fp, fmt, ap);
+    va_end(ap);
+    fflush(fp);
 }

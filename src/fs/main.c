@@ -12,9 +12,7 @@ int main(int argc, char *argv[])
 {
     int ret;
     ffs_init(NULL);
+    debug("%s\n", "run fuse_main...");
     ret = fuse_main(argc, argv, &ffs_operations, NULL);
     return ret;
-    // ffs_idpair_t id;
-    // id = ffs_findid("/");
-    // printf("%d %d\n", id.id, id.type);
 }

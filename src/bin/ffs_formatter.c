@@ -102,6 +102,6 @@ int main(int argc, char *argv[])
     }
     generate_files();
     generate_config_json();
-    puts("Success! A `config.json` file is in your working directory now.");
+    puts("Success! A `fakefs.json` file is in your working directory now.");
 END:;
 }
