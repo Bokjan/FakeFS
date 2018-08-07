@@ -12,8 +12,13 @@ static struct fuse_operations ffs_operations =
     .rename  = ffs_rename,
     .chmod   = ffs_chmod,
     .chown   = ffs_chown,
+    .utimens = ffs_utimens,
 
-    .create  = ffs_create
+    .create  = ffs_create,
+    .open    = ffs_open,
+    .release = ffs_release,
+    .read    = ffs_read,
+    .write   = ffs_write
 };
 
 int main(int argc, char *argv[])
