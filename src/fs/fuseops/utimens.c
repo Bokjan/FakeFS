@@ -6,7 +6,8 @@
 
 int ffs_utimens(const char *path, const struct timespec tv[2])
 {
-    int fd = ffs_fdmap_get(path);
+    int fd = ffs_actually_open(path, fi);
     futimens(fd, tv);
+    close(fd);
     return 0;
 }
