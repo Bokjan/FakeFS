@@ -31,6 +31,8 @@ int ffs_readdir(
         stat(epath, &est);
         if(entry.type == FFS_TYPE_DIR)
             est.st_mode = S_IFDIR | (est.st_mode & 0777);
+        else if(entry.type == FFS_TYPE_SYMLINK)
+            est.st_mode = S_IFLNK | 0777;
         filler(buf, entry.filename, &est, 0);
         free(epath);
     }

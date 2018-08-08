@@ -14,6 +14,8 @@ static struct fuse_operations ffs_operations =
     .chown     = ffs_chown,
     .utimens   = ffs_utimens,
     .statfs    = ffs_statfs,
+    .symlink   = ffs_symlink,
+    .readlink  = ffs_readlink,
 
     .create    = ffs_create,
     .open      = ffs_open,
@@ -30,7 +32,6 @@ int main(int argc, char *argv[])
 {
     int ret;
     ffs_init(NULL);
-    debug("%s\n", "run fuse_main...");
     ret = fuse_main(argc, argv, &ffs_operations, NULL);
     return ret;
 }

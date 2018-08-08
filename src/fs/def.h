@@ -18,8 +18,9 @@ then this entry is marked as deleted.
 
 #define FILEID_LEN   (4)
 #define FILENAME_LEN (256)
-#define FFS_TYPE_FILE 0
-#define FFS_TYPE_DIR  1
+#define FFS_TYPE_FILE       0
+#define FFS_TYPE_DIR        1
+#define FFS_TYPE_SYMLINK    2
 
 #define ROOTDIR_FILEID (0)
 

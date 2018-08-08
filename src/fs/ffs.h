@@ -24,6 +24,8 @@ int ffs_chmod(const char *path, mode_t mode);
 int ffs_chown(const char *path, uid_t uid, gid_t gid);
 int ffs_utimens(const char *path, const struct timespec tv[2]);
 int ffs_statfs(const char *path, struct statvfs *s);
+int ffs_symlink(const char *target, const char *linkpath); // target is relative, linkpath is absolute
+int ffs_readlink(const char *path, char *buf, size_t maxlen);
 
 int ffs_create(const char *path, mode_t mode, struct fuse_file_info *fi);
 int ffs_open(const char *path, struct fuse_file_info *fi);

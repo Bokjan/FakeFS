@@ -29,6 +29,17 @@ int ffs_getattr(const char *path, struct stat *stbuf)
         stbuf->st_mtime = sb.st_mtime;
         stbuf->st_ctime = sb.st_ctime;
     }
+    else if(fileid.type == FFS_TYPE_SYMLINK)
+    {
+        stbuf->st_mode = 0777 | S_IFLNK;
+        stbuf->st_nlink = 0;
+        stbuf->st_uid = sb.st_uid;
+        stbuf->st_gid = sb.st_gid;
+        stbuf->st_size = 4096;
+        stbuf->st_atime = sb.st_atime;
+        stbuf->st_mtime = sb.st_mtime;
+        stbuf->st_ctime = sb.st_ctime;
+    }
     else
     {
         memcpy(stbuf, &sb, sizeof(struct stat));
