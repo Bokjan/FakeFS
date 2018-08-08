@@ -6,7 +6,9 @@
 
 int ffs_utimens(const char *path, const struct timespec tv[2])
 {
-    int fd = ffs_actually_open(path, fi);
+    struct fuse_file_info fi;
+    fi.flags = O_RDWR;
+    int fd = ffs_actually_open(path, &fi);
     futimens(fd, tv);
     close(fd);
     return 0;
