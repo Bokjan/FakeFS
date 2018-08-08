@@ -19,7 +19,7 @@ int ffs_open(const char *_path, struct fuse_file_info *fi)
     free(fn);
     fn = ffs_path_by_id(entry.fileid);
     int fd = open(fn, fi->flags);
-    ffs_fdmap_set(_path, fd);
+    close(fd);
     free(fn);
     free(path);
     return 0;

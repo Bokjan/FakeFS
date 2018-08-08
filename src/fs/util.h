@@ -19,6 +19,7 @@ struct ffs_idpair
     int id, type;
 };
 typedef struct ffs_idpair ffs_idpair_t;
+struct fuse_file_info;
 
 int ffsi_get_file_size(FILE *fp);
 char* ffs_path_by_id(uint32_t id);
@@ -26,10 +27,7 @@ ffs_idpair_t ffs_findid(const char *path);
 int ffs_counter_value(void);
 int ffs_counter_increase(void);
 int ffs_split_parent(char *path);
-
-int  ffs_fdmap_get(const char *path);
-void ffs_fdmap_set(const char *path, int fd);
-void ffs_fdmap_remove(const char *path);
+int ffs_actually_open(const char *path, struct fuse_file_info *fi);
 
 #define DEBUG_FILE "/tmp/ffs/debug.log"
 #define DEBUG_MODE "w"
