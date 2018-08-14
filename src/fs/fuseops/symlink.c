@@ -7,7 +7,6 @@
 int ffs_symlink(const char *target, const char *_linkpath)
 {
     // the link file's mode should be rwxrwxrwx (0777)
-    debug("ffs_symlink: linkpath=%s target=%s\n", _linkpath, target);
     char *linkpath = strdup(_linkpath);
     int spos = ffs_split_parent(linkpath);
     // construct entry
